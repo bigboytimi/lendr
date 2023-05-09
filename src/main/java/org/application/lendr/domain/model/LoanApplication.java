@@ -3,22 +3,27 @@ package org.application.lendr.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Duration;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
 @Entity
-@RequiredArgsConstructor
-public final class LoanApplication {
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoanApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private final int amount;
-
+    private int amount;
     @ManyToOne
-    private final User borrower;
-    private final Duration repaymentTerm;
-    private final double interestRate;
+    private User borrower;
+    private int repaymentTermInDays;
+    private double interestRate;
+
+    public LoanApplication(int amount, User borrower, int repaymentTermInDays, double interestRate) {
+        this.amount = amount;
+        this.borrower = borrower;
+        this.repaymentTermInDays = repaymentTermInDays;
+        this.interestRate = interestRate;
+    }
 }
