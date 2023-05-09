@@ -1,9 +1,7 @@
 package org.application.lendr.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.Duration;
 
@@ -11,8 +9,15 @@ import java.time.Duration;
 @Getter
 @Setter
 @EqualsAndHashCode
-public final class LoanRequest {
+@Entity
+@RequiredArgsConstructor
+public final class LoanApplication {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private final int amount;
+
+    @ManyToOne
     private final User borrower;
     private final Duration repaymentTerm;
     private final double interestRate;
